@@ -1,0 +1,111 @@
+html {
+    background: rgb(230, 237, 238);
+}
+
+body {
+    position: absolute;
+    margin: 0;
+    padding: 24px 40px;
+    padding-top: 16px;
+    border-radius: 16px;
+    width: 60vw;
+    font-family: 'Poppins', sans-serif;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fefefe;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+}
+
+h1 {
+    color: rgb(46, 80, 100);
+}
+
+.addBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+}
+
+input {
+    padding: 0 12px;
+    border: 1px solid rgb(113, 156, 165);
+    border-radius: 2px;
+    width: 85%;
+    height: 32px;
+    font-size: 1rem;
+    color: rgb(97, 134, 141);
+    outline: none;
+}
+
+button {
+    padding: 10px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: .8rem;
+    color: white;
+    background: rgb(93, 166, 180);
+    outline: none;
+    cursor: pointer;
+    transition: all .4s;
+}
+
+button:hover {
+    background: rgb(113, 156, 165);
+}
+
+button.danger {
+    float: right;
+    margin-top: 40px;
+    background: inherit;
+    border: 1px solid rgb(184, 109, 109);
+    color: rgb(184, 109, 109);
+}
+
+button.danger:hover {
+    color: white;
+    background: rgb(184, 109, 109);
+}
+
+button.danger.show {
+    display: block;
+}
+
+button.danger.hide {
+    display: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    /* border-bottom: 1px solid rgb(243, 243, 243); */
+    color: rgb(46, 80, 100);
+}
+
+li:last-child {
+    border: 0;
+}
+
+a {
+    padding: 4px 8px;
+    border: 1px solid rgb(132, 144, 151);
+    border-radius: 4px;
+    font-size: .8rem;
+    text-decoration: none;
+    color: rgb(116, 131, 139);
+    transition: all .2s;
+}
+
+a:hover {
+    color: white;
+    background: rgb(132, 144, 151);
+}

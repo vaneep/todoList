@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto WeniXP</title>
+</head>
+
+<body>
+    <h1>Todo List</h1>
+    <div class="addBar">
+        <input type="text" class="todo">
+        <button class="add">Adicionar</button>
+    </div>
+    <ul class="list">
+    </ul>
+    <button class="danger hide">Remover todos</button>
+</body>
+
+<script>
+    const todos = JSON.parse(localStorage.getItem('todo')) || [];
+    const list = document.getElementsByClassName('list')[0];
+    const todo = document.getElementsByClassName('todo')[0];
+    const addBtn = document.getElementsByClassName('add')[0];
+    const delAllBtn = document.getElementsByClassName('danger')[0];
+
+
+    todo.addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+            addTodo();
+        }
+    });
+    addBtn.addEventListener('click', addTodo);
+    list.addEventListener('click', delTodo)
+    delAllBtn.addEventListener('click', delAllTodo);
+
+
+    function addTodo() {
+        const newTodo = todo.value.trim();
+        if (newTodo == '') return;
+        todos.push(newTodo);
+        todo.value = '';
+        saveTodos();
+    }
+
+    function delTodo(e) {
+        if (e.target.nodeName !== 'A') { return };
+        const dataNum = e.target.dataset.num;
+        todos.splice(dataNum, 1);
+        saveTodos();
+    }
+
+
+    function delAllTodo() {
+        todos.length = 0;
+        saveTodos();
+    }
+
+    //local storage
+    function saveTodos() {
+        var todosStr = JSON.stringify(todos);
+        localStorage.setItem('todo', todosStr);
+        updateTodos();
+    }
+
+    function updateTodos() {
+        let str = '';
+        for (let i = 0; i < todos.length; i++) {
+            str += `<li>${todos[i]}<a href="#" data-num="${i}">Remover</a></li>`
+        }
+        list.innerHTML = str;
+        if (todos.length !== 0) {
+            delAllBtn.classList.remove('hide');
+        } else {
+            delAllBtn.classList.add('hide');
+        }
+    }
+
+    updateTodos();
+
+</script>
+
+<style>
+    html {
+        background: rgb(230, 237, 238);
+    }
+
+    body {
+        position: absolute;
+        margin: 0;
+        padding: 24px 40px;
+        padding-top: 16px;
+        border-radius: 16px;
+        width: 60vw;
+        font-family: 'Poppins', sans-serif;
+        top: 8%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fefefe;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+    }
+
+    h1 {
+        color: rgb(46, 80, 100);
+    }
+
+    .addBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 48px;
+    }
+
+    input {
+        padding: 0 12px;
+        border: 1px solid rgb(113, 156, 165);
+        border-radius: 2px;
+        width: 85%;
+        height: 32px;
+        font-size: 1rem;
+        color: rgb(97, 134, 141);
+        outline: none;
+    }
+
+    button {
+        padding: 10px 12px;
+        border: none;
+        border-radius: 4px;
+        font-size: .8rem;
+        color: white;
+        background: rgb(93, 166, 180);
+        outline: none;
+        cursor: pointer;
+        transition: all .4s;
+    }
+
+    button:hover {
+        background: rgb(113, 156, 165);
+    }
+
+    button.danger {
+        float: right;
+        margin-top: 40px;
+        background: inherit;
+        border: 1px solid rgb(184, 109, 109);
+        color: rgb(184, 109, 109);
+    }
+
+    button.danger:hover {
+        color: white;
+        background: rgb(184, 109, 109);
+    }
+
+    button.danger.show {
+        display: block;
+    }
+
+    button.danger.hide {
+        display: none;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        /* border-bottom: 1px solid rgb(243, 243, 243); */
+        color: rgb(46, 80, 100);
+    }
+
+    li:last-child {
+        border: 0;
+    }
+
+    a {
+        padding: 4px 8px;
+        border: 1px solid rgb(132, 144, 151);
+        border-radius: 4px;
+        font-size: .8rem;
+        text-decoration: none;
+        color: rgb(116, 131, 139);
+        transition: all .2s;
+    }
+
+    a:hover {
+        color: white;
+        background: rgb(132, 144, 151);
+    }
+</style>
+
+</html>
